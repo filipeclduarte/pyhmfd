@@ -37,7 +37,7 @@ pip install pyhmfd
 Or from source:
 
 ```bash
-git clone https://github.com/filiped/pyhmfd.git
+git clone https://github.com/filipeclduarte/pyhmfd.git
 cd pyhmfd
 pip install -e ".[dev]"
 ```

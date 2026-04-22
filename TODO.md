@@ -42,5 +42,5 @@ df = pyhmfd.read_hmd_web_multi(countries="all", item="Mx_1x1")
 - [x] `read_hfd_web_multi()` — wrapper HFD
 - [x] Testes com mock de múltiplos países
 - [x] Exportar funções no `__init__.py`
-- [ ] Atualizar README com exemplos
-- [ ] Publicar no PyPI (0.1.4)
+- [x] Atualizar README com exemplos
+- [x] Publicar no PyPI (0.1.4)

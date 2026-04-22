@@ -29,7 +29,7 @@ def read_chmd_web(
     ----------
     prov_id:
         Province short code (``'can'`` = all Canada, ``'qc'`` = Quebec, …).
-        Use :func:`~pyhmd.hmd.get_chmd_provinces` to list all codes.
+        Use :func:`~pyhmfd.hmd.get_chmd_provinces` to list all codes.
     item:
         Data item name (e.g. ``'Deaths_1x1'``, ``'Mx_1x1'``).
     fixup:
@@ -41,8 +41,8 @@ def read_chmd_web(
 
     Examples
     --------
-    >>> import pyhmd
-    >>> df = pyhmd.read_chmd_web("qc", "Mx_1x1")
+    >>> import pyhmfd
+    >>> df = pyhmfd.read_chmd_web("qc", "Mx_1x1")
     """
     url = f"{_BASE}/{prov_id}/{item}.txt"
     resp = requests.get(url, timeout=60)

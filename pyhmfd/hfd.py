@@ -32,7 +32,7 @@ def read_hfd(filepath: str, fixup: bool = True, item: str | None = None) -> pd.D
     filepath:
         Path to the HFD ``.txt`` file.
     fixup:
-        If True, run :func:`~pyhmd.parsers.hfd_parse` to coerce column
+        If True, run :func:`~pyhmfd.parsers.hfd_parse` to coerce column
         types and add the ``OpenInterval`` indicator column.
     item:
         Data product code (e.g. ``"mabRR"``). Used by the parser to
@@ -108,8 +108,8 @@ def read_hfd_web(
 
     Examples
     --------
-    >>> import pyhmd
-    >>> df = pyhmd.read_hfd_web("USA", "asfrRR")
+    >>> import pyhmfd
+    >>> df = pyhmfd.read_hfd_web("USA", "asfrRR")
     """
     username, password = resolve_credentials(
         username, password,

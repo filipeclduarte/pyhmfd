@@ -5,8 +5,8 @@ import io
 import pandas as pd
 import pytest
 
-from pyhmd.parsers import hfd_parse, hfc_parse, hmd_parse
-from pyhmd.utils import parse_age_column, read_table_from_text
+from pyhmfd.parsers import hfd_parse, hfc_parse, hmd_parse
+from pyhmfd.utils import parse_age_column, read_table_from_text
 
 
 # ---------------------------------------------------------------------------

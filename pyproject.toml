@@ -3,12 +3,12 @@ requires = ["hatchling"]
 build-backend = "hatchling.build"
 
 [project]
-name = "pyhmd"
+name = "pyhmfd"
 version = "0.1.0"
 description = "Read Human Mortality Database and Human Fertility Database data from the web"
 readme = "README.md"
 license = { text = "GPL-2.0" }
-authors = [{ name = "Filipe Duarte", email = "duartfilipe@gmail.com" }]
+authors = [{ name = "Filipe Duarte", email = "filipe_pb_duarte@hotmail.com" }]
 keywords = ["demography", "mortality", "fertility", "HMD", "HFD"]
 classifiers = [
     "Development Status :: 3 - Alpha",
@@ -36,12 +36,12 @@ dev = [
 ]
 
 [project.urls]
-Homepage = "https://github.com/filiped/pyhmd"
-"Bug Tracker" = "https://github.com/filiped/pyhmd/issues"
+Homepage = "https://github.com/filiped/pyhmfd"
+"Bug Tracker" = "https://github.com/filiped/pyhmfd/issues"
 "R original" = "https://github.com/timriffe/HMDHFDplus"
 
 [tool.hatch.build.targets.wheel]
-packages = ["pyhmd"]
+packages = ["pyhmfd"]
 
 [tool.ruff]
 line-length = 88

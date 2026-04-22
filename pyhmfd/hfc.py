@@ -42,8 +42,8 @@ def read_hfc_web(
 
     Examples
     --------
-    >>> import pyhmd
-    >>> df = pyhmd.read_hfc_web("RUS", "ASFRstand")
+    >>> import pyhmfd
+    >>> df = pyhmfd.read_hfc_web("RUS", "ASFRstand")
     """
     url = f"{_BASE}/data/{country}/{item}.txt"
     resp = requests.get(url, timeout=60)

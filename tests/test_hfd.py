@@ -3,8 +3,8 @@
 import responses as resp_lib
 import pytest
 
-import pyhmd
-from pyhmd.hfd import _BASE, _LOGIN_URL, _country_page_url
+import pyhmfd
+from pyhmfd.hfd import _BASE, _LOGIN_URL, _country_page_url
 
 _MOCK_DATA = """\
 Age-specific fertility rates, USA, period
@@ -45,7 +45,7 @@ def test_read_hfd_web_success():
         content_type="text/plain",
     )
 
-    df = pyhmd.read_hfd_web("USA", "asfrRR", username="u", password="p")
+    df = pyhmfd.read_hfd_web("USA", "asfrRR", username="u", password="p")
     assert not df.empty
     assert "OpenInterval" in df.columns
     assert df["ASFR"].iloc[0] == pytest.approx(0.0010)
@@ -55,5 +55,5 @@ def test_read_hfd_web_success():
 def test_get_hfd_date():
     resp_lib.add(resp_lib.GET, _COUNTRY_URL,
                  body=_MOCK_COUNTRY_PAGE, status=200, content_type="text/html")
-    date = pyhmd.get_hfd_date("USA")
+    date = pyhmfd.get_hfd_date("USA")
     assert date == "20260323"

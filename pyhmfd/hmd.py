@@ -32,7 +32,7 @@ def read_hmd(filepath: str, fixup: bool = True) -> pd.DataFrame:
     filepath:
         Path to the HMD ``.txt`` file (e.g. ``Mx_1x1.txt``).
     fixup:
-        If True, run :func:`~pyhmd.parsers.hmd_parse` to coerce column
+        If True, run :func:`~pyhmfd.parsers.hmd_parse` to coerce column
         types and add the ``OpenInterval`` indicator column.
 
     Returns
@@ -104,8 +104,8 @@ def read_hmd_web(
 
     Examples
     --------
-    >>> import pyhmd
-    >>> df = pyhmd.read_hmd_web("USA", "Mx_1x1")
+    >>> import pyhmfd
+    >>> df = pyhmfd.read_hmd_web("USA", "Mx_1x1")
     """
     username, password = resolve_credentials(
         username, password,

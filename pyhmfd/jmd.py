@@ -30,7 +30,7 @@ def read_jmd_web(
     pref_id:
         Two-digit prefecture code (``'00'`` = all Japan, ``'01'`` = Hokkaido,
         …, ``'47'`` = Okinawa).
-        Use :func:`~pyhmd.hmd.get_jmd_prefectures` to list all codes.
+        Use :func:`~pyhmfd.hmd.get_jmd_prefectures` to list all codes.
     item:
         Data item name (e.g. ``'Deaths_5x5'``, ``'Mx_1x1'``).
     fixup:
@@ -42,8 +42,8 @@ def read_jmd_web(
 
     Examples
     --------
-    >>> import pyhmd
-    >>> df = pyhmd.read_jmd_web("01", "Deaths_1x1")
+    >>> import pyhmfd
+    >>> df = pyhmfd.read_jmd_web("01", "Deaths_1x1")
     """
     url = f"{_BASE}/{pref_id}/STATS/{item}.txt"
     resp = requests.get(url, timeout=60)

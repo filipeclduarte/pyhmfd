@@ -3,8 +3,8 @@
 import responses as resp_lib
 import pytest
 
-import pyhmd
-from pyhmd.hmd import _BASE, _LOGIN_URL
+import pyhmfd
+from pyhmfd.hmd import _BASE, _LOGIN_URL
 
 _MOCK_DATA = """\
 Deaths, USA, 1x1 (period 1x1), Last modified: 01-Jan-2024
@@ -35,7 +35,7 @@ def test_read_hmd_web_success():
         content_type="text/plain",
     )
 
-    df = pyhmd.read_hmd_web("USA", "Deaths_1x1", username="u", password="p")
+    df = pyhmfd.read_hmd_web("USA", "Deaths_1x1", username="u", password="p")
     assert not df.empty
     assert "OpenInterval" in df.columns
     assert df["Age"].iloc[-1] == 110
@@ -55,4 +55,4 @@ def test_read_hmd_web_bad_credentials():
     )
 
     with pytest.raises(PermissionError):
-        pyhmd.read_hmd_web("USA", "Deaths_1x1", username="bad", password="creds")
+        pyhmfd.read_hmd_web("USA", "Deaths_1x1", username="bad", password="creds")

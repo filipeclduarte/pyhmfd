@@ -1,4 +1,4 @@
-"""pyhmd — Read Human Mortality Database and Human Fertility Database data.
+"""pyhmfd — Read Human Mortality Database and Human Fertility Database data.
 
 This package is a Python port of the R package HMDHFDplus by
 Tim Riffe, Jose Manuel Aburto et al.
@@ -15,12 +15,12 @@ Supported databases
 
 Quick start
 -----------
->>> import pyhmd
->>> df = pyhmd.read_hmd_web("USA", "Mx_1x1")          # needs HMD account
->>> df = pyhmd.read_hfd_web("USA", "asfrRR")           # needs HFD account
->>> df = pyhmd.read_jmd_web("01", "Deaths_1x1")        # no auth
->>> df = pyhmd.read_chmd_web("qc", "Mx_1x1")           # no auth
->>> df = pyhmd.read_hfc_web("RUS", "ASFRstand")        # no auth
+>>> import pyhmfd
+>>> df = pyhmfd.read_hmd_web("USA", "Mx_1x1")          # needs HMD account
+>>> df = pyhmfd.read_hfd_web("USA", "asfrRR")           # needs HFD account
+>>> df = pyhmfd.read_jmd_web("01", "Deaths_1x1")        # no auth
+>>> df = pyhmfd.read_chmd_web("qc", "Mx_1x1")           # no auth
+>>> df = pyhmfd.read_hfc_web("RUS", "ASFRstand")        # no auth
 
 Credentials
 -----------

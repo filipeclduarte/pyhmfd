@@ -4,7 +4,7 @@ build-backend = "hatchling.build"
 
 [project]
 name = "pyhmfd"
-version = "0.1.0"
+version = "0.1.1"
 description = "Read Human Mortality Database and Human Fertility Database data from the web"
 readme = "README.md"
 license = { text = "GPL-2.0" }
@@ -36,8 +36,8 @@ dev = [
 ]
 
 [project.urls]
-Homepage = "https://github.com/filiped/pyhmfd"
-"Bug Tracker" = "https://github.com/filiped/pyhmfd/issues"
+Homepage = "https://github.com/filipeclduarte/pyhmfd"
+"Bug Tracker" = "https://github.com/filipeclduarte/pyhmfd/issues"
 "R original" = "https://github.com/timriffe/HMDHFDplus"
 
 [tool.hatch.build.targets.wheel]

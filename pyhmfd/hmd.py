@@ -217,13 +217,22 @@ def get_jmd_prefectures() -> dict[str, str]:
 
 
 def get_chmd_provinces() -> list[str]:
-    """Return Canadian province codes for the CHMD.
+    """Return Canadian province/territory codes for the CHMD.
 
     Returns
     -------
     list[str]
-        e.g. ``['ab', 'bc', 'can', ...]``
+        e.g. ``['alb', 'bco', 'can', ...]``
+
+    Notes
+    -----
+    CHMD uses its own 3-letter codes, distinct from standard ISO abbreviations:
+    ``can`` (Canada), ``que`` (Quebec), ``ont`` (Ontario), ``bco`` (British Columbia),
+    ``alb`` (Alberta), ``man`` (Manitoba), ``nbr`` (New Brunswick),
+    ``nsc`` (Nova Scotia), ``nfl`` (Newfoundland), ``pei`` (PEI),
+    ``sas`` (Saskatchewan), ``nwt`` (Northwest Territories), ``yuk`` (Yukon).
     """
     return sorted([
-        "can", "ab", "bc", "mb", "nb", "nl", "ns", "on", "pe", "qc", "sk",
+        "can", "que", "ont", "bco", "alb", "man", "nbr",
+        "nsc", "nfl", "pei", "sas", "nwt", "yuk",
     ])

@@ -73,7 +73,7 @@ df = pyhmfd.read_hfd_web("USA", "asfrRR")
 df = pyhmfd.read_jmd_web("01", "Deaths_1x1")   # 01 = Hokkaido
 
 # Canadian Historical Mortality Database — no auth
-df = pyhmfd.read_chmd_web("qc", "Mx_1x1")      # qc = Quebec
+df = pyhmfd.read_chmd_web("que", "Mx_1x1")     # que = Quebec
 
 # Human Fertility Collection — no auth
 df = pyhmfd.read_hfc_web("RUS", "ASFRstand")
@@ -91,14 +91,14 @@ pyhmfd.get_hmd_countries()         # ['AUS', 'AUT', ..., 'USA']
 pyhmfd.get_hfd_countries()         # DataFrame with country names and codes
 pyhmfd.get_hfc_countries()         # list of codes
 pyhmfd.get_jmd_prefectures()       # dict: name → 2-digit code
-pyhmfd.get_chmd_provinces()        # ['ab', 'bc', 'can', ...]
+pyhmfd.get_chmd_provinces()        # ['alb', 'bco', 'can', ...]
 
 # List available data items per country
 pyhmfd.get_hmd_items("USA")        # DataFrame: item, description, url
 pyhmfd.get_hfd_items("USA")        # DataFrame: item, description, url
 
 # Last-update date for an HFD country
-pyhmfd.get_hfd_date("USA")         # '20240101'
+pyhmfd.get_hfd_date("USA")         # '20260323' (date of last update)
 ```
 
 ## Output format

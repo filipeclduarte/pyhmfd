@@ -48,7 +48,7 @@ from .hmd import (
 )
 from .jmd import read_jmd_web
 
-__version__ = "0.1.1"
+__version__ = "0.1.2"
 __all__ = [
     # HMD
     "read_hmd",

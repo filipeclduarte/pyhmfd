@@ -42,7 +42,7 @@ def read_chmd_web(
     Examples
     --------
     >>> import pyhmfd
-    >>> df = pyhmfd.read_chmd_web("qc", "Mx_1x1")
+    >>> df = pyhmfd.read_chmd_web("que", "Mx_1x1")
     """
     url = f"{_BASE}/{prov_id}/{item}.txt"
     resp = requests.get(url, timeout=60)

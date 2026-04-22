@@ -148,17 +148,21 @@ def get_hfd_countries() -> pd.DataFrame:
         Columns: ``country`` (full name), ``code`` (short code).
     """
     resp = requests.get(f"{_BASE}/Data/Countries", timeout=30)
-    check_response(resp, "HFD country list")
+    check_response(resp, "HFD country list", expect_html=True)
 
     soup = BeautifulSoup(resp.text, "html.parser")
     rows = []
-    for a in soup.select("a[href*='/Country/']"):
+    for a in soup.select("a[href*='cntr=']"):
         href = a.get("href", "")
-        code = href.rstrip("/").split("/")[-1]
+        code = href.split("cntr=")[-1].strip()
         name = a.get_text(strip=True)
         if code and name:
             rows.append({"country": name, "code": code})
     return pd.DataFrame(rows).drop_duplicates("code").reset_index(drop=True)
+
+
+def _country_page_url(country: str) -> str:
+    return f"{_BASE}/Country/Country?cntr={country}"
 
 
 def get_hfd_date(country: str) -> str:
@@ -174,14 +178,14 @@ def get_hfd_date(country: str) -> str:
     str
         Eight-digit date string in ``'YYYYMMDD'`` format.
     """
-    url = f"{_BASE}/Country/GetData/{country}"
-    resp = requests.get(url, timeout=30)
-    check_response(resp, f"HFD date for {country}")
+    resp = requests.get(_country_page_url(country), timeout=30)
+    check_response(resp, f"HFD date for {country}", expect_html=True)
 
     soup = BeautifulSoup(resp.text, "html.parser")
-    # Date appears in download links: /Files/USA/20240101/USAasfrRR.txt
+    # Date appears in download links: /File/GetDocument/Files/USA/20260323/USAasfrRR.txt
+    # The server may use backslashes in hrefs — normalise them first
     for a in soup.select("a[href*='.txt']"):
-        href = a.get("href", "")
+        href = a.get("href", "").replace("\\", "/")
         parts = href.split("/")
         for part in parts:
             if len(part) == 8 and part.isdigit():
@@ -202,14 +206,13 @@ def get_hfd_items(country: str) -> pd.DataFrame:
     pandas.DataFrame
         Columns: ``item``, ``description``, ``url``.
     """
-    url = f"{_BASE}/Country/GetData/{country}"
-    resp = requests.get(url, timeout=30)
-    check_response(resp, f"HFD items for {country}")
+    resp = requests.get(_country_page_url(country), timeout=30)
+    check_response(resp, f"HFD items for {country}", expect_html=True)
 
     soup = BeautifulSoup(resp.text, "html.parser")
     rows = []
     for a in soup.select("a[href*='.txt']"):
-        href = a.get("href", "")
+        href = a.get("href", "").replace("\\", "/")
         if not href:
             continue
         filename = href.rstrip("/").split("/")[-1].replace(".txt", "")

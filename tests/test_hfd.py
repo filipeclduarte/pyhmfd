@@ -4,7 +4,7 @@ import responses as resp_lib
 import pytest
 
 import pyhmd
-from pyhmd.hfd import _BASE, _LOGIN_URL
+from pyhmd.hfd import _BASE, _LOGIN_URL, _country_page_url
 
 _MOCK_DATA = """\
 Age-specific fertility rates, USA, period
@@ -23,21 +23,23 @@ _MOCK_LOGIN_HTML = """\
 
 _MOCK_COUNTRY_PAGE = """\
 <html><body>
-<a href="/Files/USA/20240101/USAasfrRR.txt">ASFR RR</a>
+<a href="/File/GetDocument/Files/USA/20260323/USAasfrRR.txt">ASFR RR</a>
 </body></html>
 """
+
+_COUNTRY_URL = _country_page_url("USA")
 
 
 @resp_lib.activate
 def test_read_hfd_web_success():
-    resp_lib.add(resp_lib.GET, f"{_BASE}/Country/GetData/USA",
+    resp_lib.add(resp_lib.GET, _COUNTRY_URL,
                  body=_MOCK_COUNTRY_PAGE, status=200, content_type="text/html")
     resp_lib.add(resp_lib.GET, _LOGIN_URL, body=_MOCK_LOGIN_HTML, status=200,
                  content_type="text/html")
     resp_lib.add(resp_lib.POST, _LOGIN_URL, body="", status=200)
     resp_lib.add(
         resp_lib.GET,
-        f"{_BASE}/File/GetDocument/Files/USA/20240101/USAasfrRR.txt",
+        f"{_BASE}/File/GetDocument/Files/USA/20260323/USAasfrRR.txt",
         body=_MOCK_DATA,
         status=200,
         content_type="text/plain",
@@ -51,7 +53,7 @@ def test_read_hfd_web_success():
 
 @resp_lib.activate
 def test_get_hfd_date():
-    resp_lib.add(resp_lib.GET, f"{_BASE}/Country/GetData/USA",
+    resp_lib.add(resp_lib.GET, _COUNTRY_URL,
                  body=_MOCK_COUNTRY_PAGE, status=200, content_type="text/html")
     date = pyhmd.get_hfd_date("USA")
-    assert date == "20240101"
+    assert date == "20260323"

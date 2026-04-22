@@ -1,0 +1,54 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "pyhmd"
+version = "0.1.0"
+description = "Read Human Mortality Database and Human Fertility Database data from the web"
+readme = "README.md"
+license = { text = "GPL-2.0" }
+authors = [{ name = "Filipe Duarte", email = "duartfilipe@gmail.com" }]
+keywords = ["demography", "mortality", "fertility", "HMD", "HFD"]
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "Intended Audience :: Science/Research",
+    "License :: OSI Approved :: GNU General Public License v2 (GPLv2)",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Topic :: Scientific/Engineering",
+]
+requires-python = ">=3.10"
+dependencies = [
+    "requests>=2.31",
+    "pandas>=2.0",
+    "beautifulsoup4>=4.12",
+    "keyring>=24.0",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=8.0",
+    "responses>=0.25",
+    "ruff>=0.4",
+]
+
+[project.urls]
+Homepage = "https://github.com/filiped/pyhmd"
+"Bug Tracker" = "https://github.com/filiped/pyhmd/issues"
+"R original" = "https://github.com/timriffe/HMDHFDplus"
+
+[tool.hatch.build.targets.wheel]
+packages = ["pyhmd"]
+
+[tool.ruff]
+line-length = 88
+target-version = "py310"
+
+[tool.ruff.lint]
+select = ["E", "F", "I"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]

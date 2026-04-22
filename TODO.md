@@ -37,9 +37,10 @@ df = pyhmfd.read_hmd_web_multi(countries="all", item="Mx_1x1")
 
 ### Implementação
 
-- [ ] `pyhmfd/multi.py` — lógica de paralelismo e agregação
-- [ ] `read_hmd_web_multi()` — wrapper HMD
-- [ ] `read_hfd_web_multi()` — wrapper HFD
-- [ ] Testes com mock de múltiplos países
-- [ ] Exportar funções no `__init__.py`
+- [x] `pyhmfd/multi.py` — lógica de paralelismo e agregação
+- [x] `read_hmd_web_multi()` — wrapper HMD
+- [x] `read_hfd_web_multi()` — wrapper HFD
+- [x] Testes com mock de múltiplos países
+- [x] Exportar funções no `__init__.py`
 - [ ] Atualizar README com exemplos
+- [ ] Publicar no PyPI (0.1.4)

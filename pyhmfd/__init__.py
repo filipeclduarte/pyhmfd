@@ -19,7 +19,7 @@ Quick start
 >>> df = pyhmfd.read_hmd_web("USA", "Mx_1x1")          # needs HMD account
 >>> df = pyhmfd.read_hfd_web("USA", "asfrRR")           # needs HFD account
 >>> df = pyhmfd.read_jmd_web("01", "Deaths_1x1")        # no auth
->>> df = pyhmfd.read_chmd_web("qc", "Mx_1x1")           # no auth
+>>> df = pyhmfd.read_chmd_web("que", "Mx_1x1")          # no auth
 >>> df = pyhmfd.read_hfc_web("RUS", "ASFRstand")        # no auth
 
 Credentials
@@ -47,17 +47,20 @@ from .hmd import (
     read_hmd_web,
 )
 from .jmd import read_jmd_web
+from .multi import read_hfd_web_multi, read_hmd_web_multi
 
-__version__ = "0.1.2"
+__version__ = "0.1.3"
 __all__ = [
     # HMD
     "read_hmd",
     "read_hmd_web",
+    "read_hmd_web_multi",
     "get_hmd_countries",
     "get_hmd_items",
     # HFD
     "read_hfd",
     "read_hfd_web",
+    "read_hfd_web_multi",
     "get_hfd_countries",
     "get_hfd_date",
     "get_hfd_items",

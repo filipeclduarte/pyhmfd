@@ -59,6 +59,8 @@ Credentials entered interactively are offered to the system keyring for storage.
 
 ## Quick start
 
+### Single country
+
 ```python
 import pyhmfd
 
@@ -81,6 +83,60 @@ df = pyhmfd.read_hfc_web("RUS", "ASFRstand")
 # Read a locally downloaded file
 df = pyhmfd.read_hmd("/path/to/Mx_1x1.txt")
 df = pyhmfd.read_hfd("/path/to/asfrRR.txt", item="asfrRR")
+```
+
+### Multiple countries
+
+Download data for several countries in a single call. A shared authenticated
+session is reused across all downloads and requests run in parallel.
+
+```python
+import pyhmfd
+
+# HMD — download Mx_1x1 for three countries at once
+df = pyhmfd.read_hmd_web_multi(
+    countries=["AUS", "USA", "SWE"],
+    item="Mx_1x1",
+    workers=4,          # parallel download threads (default: 4)
+)
+print(df["country"].unique())   # ['AUS', 'SWE', 'USA']
+print(df.head())
+#   country  Year  Age    Female      Male     Total  OpenInterval
+# 0     AUS  1921    0  0.059987  0.076533  0.068444         False
+# ...
+
+# HFD — download asfrRR for multiple countries
+df = pyhmfd.read_hfd_web_multi(
+    countries=["USA", "SWE", "JPN"],
+    item="asfrRR",
+    workers=4,
+)
+
+# Download all available countries
+df = pyhmfd.read_hmd_web_multi(countries="all", item="Mx_1x1", workers=8)
+df = pyhmfd.read_hfd_web_multi(countries="all", item="asfrRR", workers=8)
+```
+
+#### Error handling
+
+By default, a country that fails (e.g. item not available) emits a warning and
+is skipped so the rest of the download completes. Use `on_error="raise"` to
+stop immediately on the first failure.
+
+```python
+# Warn and skip failing countries (default)
+df = pyhmfd.read_hmd_web_multi(
+    ["AUS", "USA", "XXX"],
+    "Mx_1x1",
+    on_error="warn",
+)
+
+# Raise immediately on first error
+df = pyhmfd.read_hmd_web_multi(
+    ["AUS", "USA"],
+    "Mx_1x1",
+    on_error="raise",
+)
 ```
 
 ## Utility functions
@@ -110,6 +166,31 @@ All functions return a `pandas.DataFrame`. When `fixup=True` (default):
 - `Year` and `Cohort` are `Int64`.
 - Rate and count columns are `float64`.
 - Missing values coded as `'.'` in source files become `NaN`.
+
+Multi-country functions add a leading `country` column with the country short
+code, and the result is sorted by `country`, `Year`, `Age`.
+
+## API reference
+
+| Function | Database | Auth |
+|---|---|---|
+| `read_hmd_web(country, item)` | HMD | yes |
+| `read_hmd_web_multi(countries, item)` | HMD | yes |
+| `read_hmd(filepath)` | local file | — |
+| `read_hfd_web(country, item)` | HFD | yes |
+| `read_hfd_web_multi(countries, item)` | HFD | yes |
+| `read_hfd(filepath)` | local file | — |
+| `read_jmd_web(pref_id, item)` | JMD | no |
+| `read_chmd_web(prov_id, item)` | CHMD | no |
+| `read_hfc_web(country, item)` | HFC | no |
+| `get_hmd_countries()` | HMD | no |
+| `get_hmd_items(country)` | HMD | no |
+| `get_hfd_countries()` | HFD | no |
+| `get_hfd_items(country)` | HFD | no |
+| `get_hfd_date(country)` | HFD | no |
+| `get_hfc_countries()` | HFC | no |
+| `get_jmd_prefectures()` | JMD | — |
+| `get_chmd_provinces()` | CHMD | — |
 
 ## Running tests
 

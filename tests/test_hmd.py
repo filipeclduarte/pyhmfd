@@ -29,7 +29,7 @@ def test_read_hmd_web_success():
     resp_lib.add(resp_lib.POST, _LOGIN_URL, body="", status=200)
     resp_lib.add(
         resp_lib.GET,
-        f"{_BASE}/File/GetDocument/Files/USA/STATS/Deaths_1x1.txt",
+        f"{_BASE}/File/GetDocument/hmd.v6/USA/STATS/Deaths_1x1.txt",
         body=_MOCK_DATA,
         status=200,
         content_type="text/plain",
@@ -48,7 +48,7 @@ def test_read_hmd_web_bad_credentials():
     resp_lib.add(resp_lib.POST, _LOGIN_URL, body="", status=200)
     resp_lib.add(
         resp_lib.GET,
-        f"{_BASE}/File/GetDocument/Files/USA/STATS/Deaths_1x1.txt",
+        f"{_BASE}/File/GetDocument/hmd.v6/USA/STATS/Deaths_1x1.txt",
         body="<!DOCTYPE html><html>Login required</html>",
         status=200,
         content_type="text/html",

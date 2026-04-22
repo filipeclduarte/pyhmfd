@@ -34,16 +34,27 @@ def read_table_from_text(text: str, **kwargs) -> pd.DataFrame:
     return pd.read_csv(io.StringIO(text), **defaults)
 
 
-def check_response(response: requests.Response, label: str = "request") -> None:
-    """Raise a descriptive error if the HTTP response is not 200."""
+def check_response(
+    response: requests.Response,
+    label: str = "request",
+    expect_html: bool = False,
+) -> None:
+    """Raise a descriptive error if the HTTP response signals a problem.
+
+    Parameters
+    ----------
+    expect_html:
+        Set True for login/page requests where HTML is the expected content
+        type. When False (default), receiving HTML is treated as an auth error.
+    """
     if response.status_code != 200:
         raise ConnectionError(
             f"{label} failed with HTTP {response.status_code}: {response.url}"
         )
-    # Detect redirect to login page (content is HTML instead of data)
-    ct = response.headers.get("Content-Type", "")
-    if "text/html" in ct and "<!DOCTYPE" in response.text[:200]:
-        raise PermissionError(
-            "Server returned an HTML page instead of data. "
-            "Authentication may have failed — check your credentials."
-        )
+    if not expect_html:
+        ct = response.headers.get("Content-Type", "")
+        if "text/html" in ct and "<!DOCTYPE" in response.text[:200]:
+            raise PermissionError(
+                "Server returned an HTML page instead of data. "
+                "Authentication may have failed — check your credentials."
+            )

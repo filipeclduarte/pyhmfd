@@ -58,7 +58,7 @@ def read_hfd(filepath: str, fixup: bool = True, item: str | None = None) -> pd.D
 def _login(session: requests.Session, username: str, password: str) -> None:
     """Establish an authenticated HFD session (modifies *session* in-place)."""
     resp = session.get(_LOGIN_URL, timeout=30)
-    check_response(resp, "HFD login page")
+    check_response(resp, "HFD login page", expect_html=True)
 
     soup = BeautifulSoup(resp.text, "html.parser")
     token_tag = soup.find("input", {"name": "__RequestVerificationToken"})

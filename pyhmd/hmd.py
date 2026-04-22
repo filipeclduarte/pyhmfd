@@ -54,7 +54,7 @@ def read_hmd(filepath: str, fixup: bool = True) -> pd.DataFrame:
 def _login(session: requests.Session, username: str, password: str) -> None:
     """Establish an authenticated HMD session (modifies *session* in-place)."""
     resp = session.get(_LOGIN_URL, timeout=30)
-    check_response(resp, "HMD login page")
+    check_response(resp, "HMD login page", expect_html=True)
 
     soup = BeautifulSoup(resp.text, "html.parser")
     token_tag = soup.find("input", {"name": "__RequestVerificationToken"})
@@ -117,7 +117,7 @@ def read_hmd_web(
     with requests.Session() as session:
         _login(session, username, password)
 
-        url = f"{_BASE}/File/GetDocument/Files/{country}/STATS/{item}.txt"
+        url = f"{_BASE}/File/GetDocument/hmd.v6/{country}/STATS/{item}.txt"
         resp = session.get(url, timeout=60)
         check_response(resp, f"HMD {country}/{item}")
 

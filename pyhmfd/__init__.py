@@ -49,7 +49,7 @@ from .hmd import (
 from .jmd import read_jmd_web
 from .multi import read_hfd_web_multi, read_hmd_web_multi
 
-__version__ = "0.1.3"
+__version__ = "0.1.4"
 __all__ = [
     # HMD
     "read_hmd",
